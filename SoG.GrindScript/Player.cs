@@ -55,6 +55,7 @@ namespace SoG.GrindScript
         }
     }
 
+    /*
     public class Journal : ConvertedObject
     {
         public Journal(object originalType) : base(originalType)
@@ -80,19 +81,19 @@ namespace SoG.GrindScript
         }
 
     }
+    */
 
     public class Player : ConvertedObject
     {
         public Inventory Inventory;
         public Equipment Equipment;
-        public Journal Journal;
-        
+        //public Journal Journal;
 
         public Player(object originalType) : base(originalType)
         {
             Inventory = new Inventory(_originalObject.xInventory);
             Equipment = new Equipment(_originalObject.xEquipment);
-            Journal = new Journal(_originalObject.xJournalInfo);
+            //Journal = new Journal(_originalObject.xJournalInfo);
         }
 
         /* Player Level Members */

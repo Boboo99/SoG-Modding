@@ -15,12 +15,24 @@ namespace SoG.ChaosMod
         private bool questTaken = false;
         private bool questFinished = false;
         private CustomItem alex;
-        
+
 
         public ChaosMod()
         {
-            
+
             Console.WriteLine("Hello World from Chaosmod!");
+
+            Quest.AddQuestTo(LocalGame, LocalPlayer, "Huge Quest", "Involving some huge things ;)", QuestType.KillMany,
+                ExperienceReward.CreateReward(100,
+                    new List<ItemTypes>
+                    {
+                        ItemTypes._Armor_RedKimono
+                    }),
+                new List<Objective>
+                {
+                    KillEnemiesObject.CreateObjectiveIn(LocalGame,EnemyTypes.GreenSlime, 10,
+                        "Pls dont't crash k? thx!")
+                });
         }
 
         public override void OnDraw()
@@ -30,13 +42,13 @@ namespace SoG.ChaosMod
                 return;
 
 
-           /* var font = GetFont(FontType.Verdana8);
+            /* var font = GetFont(FontType.Verdana8);
 
 
-            SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
-            SpriteBatch.DrawString(font, "Current Floor: " + LocalGame.GetCurrentFloor() + "/" + "5", new Vector2(400, 5), Color.Black);
-            SpriteBatch.End();
-            */
+             SpriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
+             SpriteBatch.DrawString(font, "Current Floor: " + LocalGame.GetCurrentFloor() + "/" + "5", new Vector2(400, 5), Color.Black);
+             SpriteBatch.End();
+             */
         }
 
         public override void OnCustomContentLoad()
@@ -60,14 +72,14 @@ namespace SoG.ChaosMod
             //function.Invoke(LocalGame.GetUnderlayingGame(), new[] { GetModItemFromString("BagKnight"), player.xEntity.xTransform.v2Pos, player.xEntity.xRenderComponent.fVirtualHeight, player.xEntity.xCollisionComponent.ibitCurrentColliderLayer, Vector2.Zero });
             //function.Invoke(LocalGame.GetUnderlayingGame(), new[] { GetModItemFromString("BananaMan"), player.xEntity.xTransform.v2Pos, player.xEntity.xRenderComponent.fVirtualHeight, player.xEntity.xCollisionComponent.ibitCurrentColliderLayer, Vector2.Zero });
 
-            alex.SpawnOn(LocalGame,LocalPlayer);
+            alex.SpawnOn(LocalGame, LocalPlayer);
 
         }
 
         public override void OnPlayerKilled()
         {
-            if(LocalGame.GetCurrentFloor() < 5)
-                Dialogue.AddDialogueLineTo(LocalGame,"I am not going to lie, but it's not looking good...");
+            if (LocalGame.GetCurrentFloor() < 5)
+                Dialogue.AddDialogueLineTo(LocalGame, "I am not going to lie, but it's not looking good...");
             if (LocalGame.GetCurrentFloor() >= 5)
             {
                 Dialogue.AddDialogueLineTo(LocalGame,
@@ -82,7 +94,7 @@ namespace SoG.ChaosMod
 
         public override void OnEnemyDamaged(Enemy enemy, ref int damage, ref byte type)
         {
-            var currentFloor = (double) LocalGame.GetCurrentFloor();
+            var currentFloor = (double)LocalGame.GetCurrentFloor();
             var factor = 1 - 0.15 * currentFloor;
 
             damage = (int)Math.Floor(damage * factor);
@@ -98,7 +110,7 @@ namespace SoG.ChaosMod
         {
             Console.WriteLine("Arcadia loaded....!");
             NPC teddy = NPC.AddNPCTo(LocalGame, NPCTypes.Teddy, new Vector2(1000, 250));
-            NPC vilya = NPC.AddNPCTo(LocalGame, NPCTypes.Desert_Saloon_PokerCaptain, new Vector2(990,260));
+            NPC vilya = NPC.AddNPCTo(LocalGame, NPCTypes.Desert_Saloon_PokerCaptain, new Vector2(990, 260));
 
             vilya.IsInteractable = true;
             vilya.LookAtPlayerOnInteraction = true;
@@ -121,11 +133,11 @@ namespace SoG.ChaosMod
                                                           "Reach Floor 5 and you will get a special reward!");
                     questTaken = true;
 
-                    
+
                 }
-                else if(questFinished)
+                else if (questFinished)
                 {
-                    Dialogue.AddDialogueLineTo(LocalGame,"You managed to reach floor 5! Here is your reward!" + Environment.NewLine + "*Proceeds to give you one gold coin*");
+                    Dialogue.AddDialogueLineTo(LocalGame, "You managed to reach floor 5! Here is your reward!" + Environment.NewLine + "*Proceeds to give you one gold coin*");
                     LocalPlayer.Inventory.AddMoney(1);
                 }
                 else if (questTaken)

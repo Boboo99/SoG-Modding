@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -32,6 +33,7 @@ namespace SoG.GrindScript
                 GetField("spriteBatch", BindingFlags.Instance | BindingFlags.NonPublic)?.GetValue(_game);
 
             LocalPlayer = new Player(_game.xLocalPlayer);
+
         }
 
         protected SpriteFont GetFont(FontType font)

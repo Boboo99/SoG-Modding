@@ -60,7 +60,7 @@ namespace SoG.GrindScript
 
             items[newItem.enType] = newItem;
 
-            Console.WriteLine("Added the custom item called " + name + " with the id" + newId + "...");
+            Console.WriteLine("Added the custom item called " + name + " with the id " + 400000 + newId + "...");
 
             var customItem = new CustomItem(newItem) {Id = newId};
 

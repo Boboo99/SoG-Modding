@@ -1986,6 +1986,15 @@ namespace SoG.GrindScript
         _EnemySkill_LukeWeaponThrow_Path = 40081
     }
 
+    public enum QuestType
+    {
+        Main,
+        Collect,
+        Kill,
+        KillMany,
+        Deliver
+    }
+
 }
 
 
